@@ -36,8 +36,8 @@ def compare_outputs(expected_file_path, output_file_path):
     return mismatches
 
 def main():
-    file_path = 'C.txt'
-    expected_file_path = 'expected_output.txt'  # Update this to the correct file path
+    file_path = 'tester files/C.txt'
+    expected_file_path = 'tester files/tester_correct_output.txt'  # Update this to the correct file path
     
     flights, cities = parse_test_case(file_path)
     flight_planner = Planner(flights)
@@ -45,7 +45,7 @@ def main():
     # Set random seed for consistent results
     sampled_pairs = [(3472, 8812), (3898, 5857), (9188, 1890), (9172, 4200), (2490, 2577), (8742, 3844), (3091, 4143), (8932, 4592), (1973, 1739), (3019, 667), (8594, 1874), (9842, 560), (2512, 3816), (1745, 9447), (949, 6732), (7124, 618), (2868, 1502), (9985, 1041), (3950, 8661), (401, 9030)]
 
-    with open("output.txt", 'w') as output_file:
+    with open("tester files/tester_output.txt", 'w') as output_file:
         # Track overall start time
         overall_start_time = time.time()
         
@@ -92,7 +92,7 @@ def main():
         overall_time_taken = time.time() - overall_start_time
         write_to_output(output_file, f"Total time taken for all tests: {overall_time_taken:.2f} seconds")
 
-    mismatches = compare_outputs(expected_file_path, "output.txt")
+    mismatches = compare_outputs(expected_file_path, "tester files/tester_output.txt")
     if not mismatches:
         print("All test cases passed.")
         print(f"Total time taken for all tests: {overall_time_taken:.2f} seconds")

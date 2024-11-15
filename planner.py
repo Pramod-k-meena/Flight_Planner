@@ -5,7 +5,6 @@ class Planner:
         """Args:
             flights (List[Flight]): A list of information of all the flights (objects of class Flight)
         """
-
         self.flights = flights
         max_city = 0
         for flight in flights:
@@ -40,8 +39,8 @@ class Planner:
                     required_flight = last_flight
                 continue
 
-            if(flight_count>=least_count):
-                continue
+            if(flight_count>least_count):
+                break
 
             for flight in self.adj_lists[current_city]:
                 if(flight.departure_time >= last_arrival + 20) and flight.arrival_time <= t2 and flight.departure_time >= t1:
@@ -85,7 +84,7 @@ class Planner:
                 if total_cost < least_cost:
                     least_cost = total_cost
                     required_flight = last_flight
-                continue
+                break
 
             if(total_cost>=least_cost):
                 continue
@@ -132,8 +131,8 @@ class Planner:
                     required_flight = last_flight
                 continue
 
-            if(flight_count>=least_count):
-                continue
+            if(flight_count>least_count):
+                break
 
             for flight in self.adj_lists[current_city]:
                 if(flight.departure_time >= last_arrival + 20) and flight.arrival_time <= t2 and flight.departure_time >= t1:
