@@ -15,7 +15,6 @@ class Planner:
         self.adj_lists = [[] for _ in range(max_city + 1)]
         for flight in flights:
             self.adj_lists[flight.start_city].append(flight)
-        
 
     def least_flights_earliest_route(self, start_city, end_city, t1, t2):
         if start_city == end_city:
@@ -135,7 +134,7 @@ class Planner:
 
             if(flight_count>=least_count):
                 continue
-            
+
             for flight in self.adj_lists[current_city]:
                 if(flight.departure_time >= last_arrival + 20) and flight.arrival_time <= t2 and flight.departure_time >= t1:
                     if(flight_count+1 < counter[flight.flight_no]) or (flight_count+1 == counter[flight.flight_no] and total_cost+flight.fare < cost[flight.flight_no]):
