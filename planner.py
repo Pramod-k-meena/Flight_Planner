@@ -34,12 +34,14 @@ class Planner:
             entry = pq.pop_front()
             flight_count,  last_flight = entry
             last_arrival, current_city = last_flight.arrival_time, last_flight.end_city
-
             if current_city == end_city:
                 if flight_count < least_count or (flight_count == least_count and last_arrival<least_time):
                     least_count = flight_count
                     least_time = last_arrival
                     required_flight = last_flight
+                continue
+
+            if(flight_count>=least_count):
                 continue
 
             for flight in self.adj_lists[current_city]:
@@ -66,13 +68,14 @@ class Planner:
         
         pq = Heap(comparison_function=compare_entries)
         cost = [float('inf') for _ in range(len(self.flights) + 1)]
+        least_cost = float('inf')
+        prv_flight = [None for _ in range(len(self.flights) + 1)]
+        required_flight = None
+
         for flight in self.adj_lists[start_city]:
             if flight.departure_time >= t1 and flight.arrival_time <= t2:
                 cost[flight.flight_no] = flight.fare
                 pq.insert((flight.fare, flight))
-        least_cost = float('inf')
-        prv_flight = [None for _ in range(len(self.flights) + 1)]
-        required_flight = None
 
         while len(pq)>0:
             entry = pq.extract()
@@ -83,6 +86,9 @@ class Planner:
                 if total_cost < least_cost:
                     least_cost = total_cost
                     required_flight = last_flight
+                continue
+
+            if(total_cost>=least_cost):
                 continue
 
             for flight in self.adj_lists[current_city]:
@@ -120,7 +126,6 @@ class Planner:
             entry = pq.pop_front()
             flight_count,total_cost, last_flight = entry
             last_arrival, current_city = last_flight.arrival_time, last_flight.end_city
-
             if current_city == end_city:
                 if flight_count < least_count or (flight_count == least_count and total_cost<least_cost):
                     least_count = flight_count
@@ -128,6 +133,9 @@ class Planner:
                     required_flight = last_flight
                 continue
 
+            if(flight_count>=least_count):
+                continue
+            
             for flight in self.adj_lists[current_city]:
                 if(flight.departure_time >= last_arrival + 20) and flight.arrival_time <= t2 and flight.departure_time >= t1:
                     if(flight_count+1 < counter[flight.flight_no]) or (flight_count+1 == counter[flight.flight_no] and total_cost+flight.fare < cost[flight.flight_no]):

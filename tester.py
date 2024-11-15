@@ -43,15 +43,8 @@ def main():
     flight_planner = Planner(flights)
     
     # Set random seed for consistent results
-    random.seed(13)
-    
-    # Generate all unique pairs of cities (start_city, destination)
-    city_pairs = [(start, dest) for start in cities for dest in cities if start != dest]
-    
-    # Randomly select 20 unique pairs
     sampled_pairs = [(3472, 8812), (3898, 5857), (9188, 1890), (9172, 4200), (2490, 2577), (8742, 3844), (3091, 4143), (8932, 4592), (1973, 1739), (3019, 667), (8594, 1874), (9842, 560), (2512, 3816), (1745, 9447), (949, 6732), (7124, 618), (2868, 1502), (9985, 1041), (3950, 8661), (401, 9030)]
 
-    
     with open("output.txt", 'w') as output_file:
         # Track overall start time
         overall_start_time = time.time()
@@ -63,7 +56,7 @@ def main():
             output_lines = [
                 f"Testing routes for start_city={start_city}, destination={destination}"
             ]
-             
+            
             # Task 1: Least Flights Earliest Route
             route1 = flight_planner.least_flights_earliest_route(start_city, destination, 0, 3000000000000)
             if route1:

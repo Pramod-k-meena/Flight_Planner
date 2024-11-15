@@ -29,13 +29,7 @@ def main():
     flight_planner = Planner(flights)
     
     # Set random seed for consistent results
-    random.seed(13)# perfect
-    
-    # Generate all unique pairs of cities (start_city, destination)
-    city_pairs = [(start, dest) for start in cities for dest in cities if start != dest]
-    
-    # Randomly select 20 unique pairs
-    sampled_pairs = random.sample(city_pairs, 20)
+    sampled_pairs = [(3472, 8812), (3898, 5857), (9188, 1890), (9172, 4200), (2490, 2577), (8742, 3844), (3091, 4143), (8932, 4592), (1973, 1739), (3019, 667), (8594, 1874), (9842, 560), (2512, 3816), (1745, 9447), (949, 6732), (7124, 618), (2868, 1502), (9985, 1041), (3950, 8661), (401, 9030)]
     
     with open(output_path, 'w') as output_file:
         # Track overall start time
@@ -55,7 +49,9 @@ def main():
                 write_to_output(output_file, f"Task 1: Least Flights Earliest Route - Number of flights: {num_flights_task1}, Arrival time: {arrival_time_task1}")
             else:
                 write_to_output(output_file, "Task 1: No route found.")
-            
+            first_time = time.time()-start_time
+            write_to_output(output_file, f"Time taken for start_city={start_city}, destination={destination}: {first_time:.2f} seconds\n")
+
             # Task 2: Cheapest Route
             route2 = flight_planner.cheapest_route(start_city, destination, 0, 3000000000000)
             if route2:
@@ -63,7 +59,9 @@ def main():
                 write_to_output(output_file, f"Task 2: Cheapest Route - Total cost: {total_cost_task2}")
             else:
                 write_to_output(output_file, "Task 2: No route found.")
-            
+            sec = time.time()-start_time
+            write_to_output(output_file, f"Time taken for start_city={start_city}, destination={destination}: {sec:.2f} seconds\n")
+
             # Task 3: Least Flights Cheapest Route
             route3 = flight_planner.least_flights_cheapest_route(start_city, destination, 0, 30000000000)
             if route3:

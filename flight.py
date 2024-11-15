@@ -16,5 +16,4 @@ class Flight:
         self.end_city = end_city
         self.arrival_time = arrival_time
         self.fare = fare
-        self.prv = None
         

@@ -1,7 +1,7 @@
 import random
 from typing import List, Tuple, Dict
 from flight import Flight
-from testing_planner import Planner
+from planner import Planner
 import time
 from datetime import datetime
 import sys
