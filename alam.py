@@ -17,8 +17,8 @@ def generate_random_flights(num_cities, num_flights, max_time, max_fare):
         arrival_time = departure_time + random.randint(20, 100)
         fare = random.randint(10, max_fare)
         flights.append(Flight(i, start_city, departure_time, end_city, arrival_time, fare))
+        # print(i, start_city, departure_time, end_city, arrival_time, fare)
     return flights
-
 
 def generate_all_possible_routes(start_city, end_city, t1, t2):
     if (start_city, end_city) in mem:
@@ -49,7 +49,7 @@ def generate_all_possible_routes(start_city, end_city, t1, t2):
 
 def validate_least_flights_ealiest(planner, start_city, end_city, t1, t2):
     all_routes = generate_all_possible_routes(start_city, end_city, t1, t2)
-    route = planner.least_flights_ealiest_route(start_city, end_city, t1, t2)
+    route = planner.least_flights_earliest_route(start_city, end_city, t1, t2)
 
     if all_routes == []:
         if route == []:
@@ -149,6 +149,8 @@ def check_problem_1(planner, t1, t2, num_cities):
             if not validate_least_flights_ealiest(planner, start_city, end_city, t1, t2):
                 print(f'Failed on problem 1: {start_city=} and {end_city=}')
                 return
+            # else:
+            #     print(f'Passed: {start_city=} and {end_city=}')
             
     print('Passed Problem 1')
 
@@ -161,6 +163,7 @@ def check_problem_2(planner, t1, t2, num_cities):
             if not validate_cheapest_route(planner, start_city, end_city, t1, t2):
                 print(f'Failed on problem 2: {start_city=} and {end_city=}')
                 return
+
     
     print('Passed Problem 2')
 
@@ -173,6 +176,8 @@ def check_problem_3(planner, t1, t2, num_cities):
             if not validate_least_flights_cheapest(planner, start_city, end_city, t1, t2):
                 print(f'Failed on problem 3: {start_city=} and {end_city=}')
                 return
+            # else:
+            #     print(f'Passed: {start_city=} and {end_city=}')
     
     print('Passed Problem 3')
 

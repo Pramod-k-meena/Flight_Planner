@@ -48,7 +48,7 @@ def main():
             write_to_output(output_file, f"\nTesting routes for start_city={start_city}, destination={destination}")
             
             # Task 1: Least Flights Earliest Route
-            route1 = flight_planner.least_flights_ealiest_route(start_city, destination, 0, 3000000000000)
+            route1 = flight_planner.least_flights_earliest_route(start_city, destination, 0, 3000000000000)
             if route1:
                 num_flights_task1 = len(route1)
                 arrival_time_task1 = route1[-1].arrival_time if num_flights_task1 > 0 else None
